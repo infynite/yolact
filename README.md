@@ -8,7 +8,7 @@
        ╚═╝    ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝   ╚═╝ 
 ```
 
-** Forked Versoin Edits: editted eval.py and exports mask in working directory as mask.npy file + added mask_to_png.py**
+**Forked Versoin Edits: editted eval.py and exports mask in working directory as mask.npy file + added mask_to_png.py**
 
 A simple, fully convolutional model for real-time instance segmentation. This is the code for our papers:
  - [YOLACT: Real-time Instance Segmentation](https://arxiv.org/abs/1904.02689)
