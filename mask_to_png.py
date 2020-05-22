@@ -3,7 +3,5 @@ from matplotlib import pyplot as plt
 from matplotlib import image
 import numpy as np
 
-
-masks = np.load("masks.npy")
-plt.imshow(masks[0])
-plt.imsave('s-mask.png', masks[0], cmap=plt.get_cmap("gray"))
+def mask_save(np_mask, path):
+  plt.imsave(path, np_mask[0], cmap=plt.get_cmap("gray"))
