@@ -7,7 +7,7 @@ from utils import timer
 from utils.functions import SavePath
 from layers.output_utils import postprocess, undo_image_transformation
 import pycocotools
-
+from mask_to_png import mask_save
 from data import cfg, set_cfg, set_dataset
 
 import numpy as np
@@ -43,6 +43,9 @@ def parse_args(argv=None):
     parser.add_argument('--trained_model',
                         default='weights/ssd300_mAP_77.43_v2.pth', type=str,
                         help='Trained state_dict file path to open. If "interrupt", this will open the interrupt file.')
+    parser.add_argument('--mask_path',
+                        default='mask.png', type=str,
+                        help='Saved mask path')
     parser.add_argument('--top_k', default=5, type=int,
                         help='Further restrict the number of predictions to parse')
     parser.add_argument('--cuda', default=True, type=str2bool,
@@ -157,7 +160,8 @@ def prep_display(dets_out, img, h, w, undo_transform=True, class_color=False, ma
         if cfg.eval_mask_branch:
             # Masks are drawn on the GPU, so don't copy
             masks = t[3][idx]
-            np.save('masks.npy', masks.cpu().numpy())
+            mask_save(masks.cpu().numpy(), args.mask_path)
+            # np.save('masks.npy', masks.cpu().numpy())
         classes, scores, boxes = [x[idx].cpu().numpy() for x in t[:3]]
 
     num_dets_to_consider = min(args.top_k, classes.shape[0])
